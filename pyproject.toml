@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Associative-Analysis-of-Brain-Structural-Phenotypes-and-Different-Depressive-Trajectories-in-Adolescents"
+version = "0.1.0"
+description = "Associative analysis of brain structural phenotypes and different depressive trajectories in adolescents"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    {name = "Qingkun Deng"}
+]
+license = {text = "MIT"}
+]
+
+dependencies = ["ruff",
+"pre-commit",
+"pandas",
+"matplotlib",
+"scikit-learn",
+"ipykernel",
+"nilearn",
+"plotly",
+"neuroCombat",
+"scikit-learn",
+]
+
+[tool.ruff]
+select = ["E", "F", "D", "I"]
+ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "E501", "E712", "E741", "D205", "D209", "D210"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.sqlfluff.core]
+dialect = "tsql"
+templater = "placeholder"
+exclude_rules = "L016,L031"
+max_line_length = 88
