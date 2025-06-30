@@ -9,16 +9,19 @@ This repository contains a neuroscience research project that performs associati
 ## Development Commands
 
 ### Code Quality
+
 - **Lint**: `ruff check src/`
 - **Format**: `ruff format src/`
 - **Pre-commit hooks**: `pre-commit run --all-files`
 - **Always use IDE diagnostics to validate code after implementation**
 
 ### Package Management
+
 - **Install dependencies**: `pip install -e .` (editable install)
 - **Update dependencies**: `pip-compile --output-file=requirements.txt pyproject.toml`
 
 ### Testing
+
 No specific test framework configured. Check with the user for testing approach if needed.
 
 ## Architecture and Code Structure
@@ -49,6 +52,7 @@ The main preprocessing logic is in `src/preprocess/scripts/prepare_data.py` whic
 ### Dependencies
 
 Key neuroimaging libraries:
+
 - `nilearn`: Neuroimaging analysis
 - `neuroCombat`: Batch effect correction
 - `scikit-learn`: Machine learning utilities
