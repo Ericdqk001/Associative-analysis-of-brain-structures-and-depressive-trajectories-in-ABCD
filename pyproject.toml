@@ -13,17 +13,15 @@ authors = [
 ]
 license = {text = "MIT"}
 
-dependencies = ["ruff",
-"pre-commit",
+dependencies = [
 "pandas",
 "matplotlib",
 "scikit-learn",
 "ipykernel",
 "nilearn",
 "plotly",
-"neuroCombat",
-"scikit-learn",
 "openpyxl",
+"numpy",
 ]
 
 [tool.ruff]
@@ -32,3 +30,24 @@ ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "E712"
 
 [tool.ruff.pydocstyle]
 convention = "google"
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+Associative-Analysis-of-Brain-Structural-Phenotypes-and-Different-Depressive-Trajectories-in-Adolescents = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+
+[tool.pixi.tasks]
+add_hook = "pre-commit install"
+
+[dependency-groups]
+dev = [
+"pre-commit>=4.2.0,<5",
+"ruff",
+"pip-tools",
+]
