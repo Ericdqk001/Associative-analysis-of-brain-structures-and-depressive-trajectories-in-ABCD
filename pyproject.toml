@@ -32,7 +32,7 @@ ignore = ["D100", "D101", "D102", "D103", "D104", "D105", "D106", "D107", "E712"
 convention = "google"
 
 [tool.pixi.workspace]
-channels = ["conda-forge"]
+channels = ["conda-forge", "ejolly"]
 platforms = ["osx-arm64"]
 
 [tool.pixi.pypi-dependencies]
@@ -44,6 +44,9 @@ dev = { features = ["dev"], solve-group = "default" }
 
 [tool.pixi.tasks]
 add_hook = "pre-commit install"
+
+[tool.pixi.dependencies]
+pymer4 = ">=0.9.2,<0.10"
 
 [dependency-groups]
 dev = [
