@@ -23,6 +23,7 @@ dependencies = ["ruff",
 "plotly",
 "neuroCombat",
 "scikit-learn",
+"openpyxl",
 ]
 
 [tool.ruff]

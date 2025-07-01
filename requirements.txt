@@ -26,6 +26,8 @@ decorator==5.2.1
     # via ipython
 distlib==0.3.9
     # via virtualenv
+et-xmlfile==2.0.0
+    # via openpyxl
 exceptiongroup==1.3.0
     # via ipython
 executing==2.2.0
@@ -87,6 +89,8 @@ numpy==2.2.6
     #   pandas
     #   scikit-learn
     #   scipy
+openpyxl==3.1.5
+    # via Associative-Analysis-of-Brain-Structural-Phenotypes-and-Different-Depressive-Trajectories-in-Adolescents (pyproject.toml)
 packaging==25.0
     # via
     #   ipykernel
