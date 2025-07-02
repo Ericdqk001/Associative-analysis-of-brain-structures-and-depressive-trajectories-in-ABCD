@@ -68,13 +68,16 @@ def perform_repeated_measures_analysis(
 
     # Convert categorical variables
     categorical_cols = [
+        "src_subject_id",
         "class_label",
         "demo_sex_v2",
         "img_device_label",
         "hemisphere",
         "site_id_l",
         "rel_family_id",
+        "demo_comb_income_v2",
     ]
+
     features_df = features_df.with_columns(
         [pl.col(col).cast(pl.String).cast(pl.Categorical) for col in categorical_cols]
     )
@@ -155,23 +158,21 @@ def perform_repeated_measures_analysis(
                 continue
 
             # Save both main trajectory class effect and hemisphere interaction
-            coefs = model.coefs
+            model_stats = model.result_fit
 
-            # print(coefs)
-            # Filter by index (effect names)
-            coefs = coefs.loc[coefs.index.isin(effects_of_interest)].copy()
-            coefs = coefs.reset_index().rename(columns={"index": "effect_name"})
-            coefs["modality"] = modality
-            coefs["feature"] = feature
+            # Filter by effect names (assuming first column contains effect names)
+            coefs = model_stats.filter(
+                pl.col(model_stats.columns[0]).is_in(effects_of_interest)
+            ).with_columns(
+                [pl.lit(modality).alias("modality"), pl.lit(feature).alias("feature")]
+            )
 
             results_list.append(coefs)
-            # print(results_list)
 
     # Create results directory
     results_path = Path(
-        "src",
-        "img_analysis",
-        "experiments",
+        analysis_root_path,
+        version_name,
         f"exp_{experiment_number}",
     )
 
@@ -186,8 +187,9 @@ def perform_repeated_measures_analysis(
         )
     )
 
-    print(f"Repeated analysis complete for {wave}. Results saved to:")
-    print(results_path / f"repeated_bilateral_traj_results-{wave}.csv")
+    logging.info(
+        f"Repeated analysis complete for {wave}. Results saved to: {results_path / f'repeated_bilateral_traj_results-{wave}.csv'}"  # noqa: E501
+    )
 
 
 if __name__ == "__main__":
