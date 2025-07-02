@@ -39,9 +39,18 @@ def perform_repeated_measures_analysis(
         "depression_trajectories",
     )
 
-    processed_data_path = Path(
+    version_path = Path(
         analysis_root_path,
         version_name,
+    )
+
+    experiments_path = Path(
+        version_path,
+        f"exp_{experiment_number}",
+    )
+
+    processed_data_path = Path(
+        experiments_path,
         "processed_data",
     )
 
@@ -135,6 +144,7 @@ def perform_repeated_measures_analysis(
             # The formula estimates a random intercept for each subject
             # and family nested within sites
             formula = f"{feature} ~ hemisphere * {predictor} + {' + '.join(fixed_effects)} + (1|src_subject_id) + (1|site_id_l:rel_family_id)"  # noqa: E501
+            logging.info(f"Using formula: {formula}")
             try:
                 model = lmer(
                     formula,
@@ -171,9 +181,8 @@ def perform_repeated_measures_analysis(
 
     # Create results directory
     results_path = Path(
-        analysis_root_path,
-        version_name,
-        f"exp_{experiment_number}",
+        experiments_path,
+        "results",
     )
 
     results_path.mkdir(parents=True, exist_ok=True)
@@ -193,6 +202,14 @@ def perform_repeated_measures_analysis(
 
 
 if __name__ == "__main__":
-    wave = "2_year_follow_up_y_arm_1"
+    wave = "baseline_year_1_arm_1"
 
-    perform_repeated_measures_analysis(wave=wave)
+    version_name = "test"
+    experiment_number = 1
+
+    perform_repeated_measures_analysis(
+        wave=wave,
+        version_name=version_name,
+        experiment_number=experiment_number,
+        predictor="class_label",
+    )

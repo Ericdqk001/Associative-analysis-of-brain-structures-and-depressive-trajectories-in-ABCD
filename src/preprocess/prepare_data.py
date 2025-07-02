@@ -13,6 +13,7 @@ from sklearn.preprocessing import LabelEncoder, StandardScaler
 def preprocess(
     wave: str = "baseline_year_1_arm_1",
     version_name: str = "test",
+    experiment_number: int = 1,
 ):
     logging.info("-----------------------")
     logging.info("Processing wave: %s", wave)
@@ -39,9 +40,14 @@ def preprocess(
         "data",
     )
 
-    processed_data_path = Path(
+    experiments_path = Path(
         analysis_root_path,
         version_name,
+        f"exp_{experiment_number}",
+    )
+
+    processed_data_path = Path(
+        experiments_path,
         "processed_data",
     )
 
