@@ -800,7 +800,7 @@ packages:
 - pypi: .
   name: associative-analysis-of-brain-structural-phenotypes-and-different-depressive-trajectories-in-adolescents
   version: 0.1.0
-  sha256: ac0b13aa4a7ef573d92677ed3b08ff26d8e7fe2a090e6dd07f2342ccb298c1b9
+  sha256: 0c7eeea5d86355470b8724063c36205a2ba8101c36b9210a40b0b56928d9496a
   requires_dist:
   - pandas
   - matplotlib
